@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from '../UI/Card/Card';
-import classes from './Login.module.css';
+import  './Login.css';
 import Button from '../UI/Button/Button';
 
 const Login = (props) => {
@@ -11,20 +11,23 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+
+useEffect(() => {
+  
+  setFormIsValid(
+    enteredEmail.includes('@') && enteredPassword.trim().length > 6);
+
+  
+}, [enteredEmail, enteredPassword]);
+
+// eslint-disable-next-line
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
 
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
-    );
-  };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
 
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
   };
 
   const validateEmailHandler = () => {
@@ -39,13 +42,13 @@ const Login = (props) => {
     event.preventDefault();
     props.onLogin(enteredEmail, enteredPassword);
   };
-
+  
   return (
-    <Card className={classes.login}>
+    <Card className="login">
       <form onSubmit={submitHandler}>
         <div
-          className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ''
+          className={`${"control"} ${
+            emailIsValid === false ? "invalid" : ''
           }`}
         >
           <label htmlFor="email">E-Mail</label>
@@ -58,8 +61,8 @@ const Login = (props) => {
           />
         </div>
         <div
-          className={`${classes.control} ${
-            passwordIsValid === false ? classes.invalid : ''
+          className={`${"control"} ${
+            passwordIsValid === false ? "invalid" : ''
           }`}
         >
           <label htmlFor="password">Password</label>
@@ -71,14 +74,14 @@ const Login = (props) => {
             onBlur={validatePasswordHandler}
           />
         </div>
-        <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-            Login
+        <div className="actions">
+          <Button type="submit" className="btn" disabled={!formIsValid}>
+            Log here
           </Button>
         </div>
       </form>
     </Card>
   );
 };
-
+}
 export default Login;
