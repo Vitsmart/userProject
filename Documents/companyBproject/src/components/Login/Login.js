@@ -20,10 +20,10 @@ useEffect(() => {
   
 }, [enteredEmail, enteredPassword]);
 
-// eslint-disable-next-line
+
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
-
+  }
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
@@ -76,12 +76,12 @@ useEffect(() => {
         </div>
         <div className="actions">
           <Button type="submit" className="btn" disabled={!formIsValid}>
-            Log here
+            Login
           </Button>
         </div>
       </form>
     </Card>
   );
 };
-}
+
 export default Login;
